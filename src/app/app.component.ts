@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase/app';
-import 'firebase/database';
+import 'firebase/firestore';
+
+import { CbuDataService } from './cbu-data.service';
 
 @Component({
   selector: 'app-root',
@@ -8,47 +10,46 @@ import 'firebase/database';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  
-  dbQuery: any;
-  ref: any;
   dataPulled = false;
 
-  buildings: any = [];
-  faculty: any = [];
-
   getData(): any {
-    const config = {
+
+    firebase.initializeApp({
       apiKey: "AIzaSyA52UpzQ_rktmwa8huwb_RVVMndMdUlZBE",
       authDomain: "cbusmartmap.firebaseapp.com",
       databaseURL: "https://cbusmartmap.firebaseio.com",
       projectId: "cbusmartmap",
       storageBucket: "cbusmartmap.appspot.com",
       messagingSenderId: "11156238866"
-    };
-    firebase.initializeApp(config);
-    const database = firebase.database;
+    });
 
-    this.ref = firebase.database().ref();
+    //Initialize cloud firestore through firebase
+    const db = firebase.firestore();
 
-    console.log(firebase.app().name);
-    console.log("TEST");
-
-    const queryData = [];
+    //Disable depricated features
+    db.settings({
+      timestampsInSnapshots: true
+    });
 
     const _this = this;
+    const queryData = [];
 
-    // this.ref.once("value", function(snap) {
-    //   snap.forEach(function(item) {
-    //     queryData.push(item.val());
-    //   });
-    //   _this.studentDataService.pushStudentData(queryData);
-    //   _this.dataPulled = true;
-    // });
+   db.collection("buildings").get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      //console.log(`${doc.id} => ${doc.data()}`);
+      const tempDoc: any = doc.data();
+      tempDoc.uniqueID = doc.id;
+      queryData.push(tempDoc);
+    });
+    _this.cbuDataService.buildings = queryData;
+    _this.dataPulled = true;
+    console.log(queryData);
+   });
 
   }
 
 
-  constructor() {}
+  constructor(private cbuDataService: CbuDataService) {}
 
   ngOnInit() {
     this.getData();

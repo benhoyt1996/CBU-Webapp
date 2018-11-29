@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,18 +9,21 @@ import { BuildingListComponent } from './pages/building-list/building-list.compo
 
 //Theme Component Imports
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { BuildingDisplayComponent } from './pages/building-display/building-display.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     FacultyListComponent,
-    BuildingListComponent
+    BuildingListComponent,
+    BuildingDisplayComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

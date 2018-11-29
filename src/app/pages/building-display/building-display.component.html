@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col justify-content-center mx-2 my-3">
+
+      <div class="text-title mb-2">Building Title:</div>
+      <div class="input-group mb-2">
+        <textarea class="form-control" aria-label="With textarea" [(ngModel)]="buildingTitle"> {{buildingTitle}} </textarea>
+      </div>
+
+      <div class="text-title mb-2">Building subTitle:</div>
+      <div class="input-group mb-2">
+        <textarea class="form-control" aria-label="With textarea" [(ngModel)]="buildingSubTitle"> {{buildingSubTitle}} </textarea>
+      </div>
+
+      <div class="text-title mb-2">Building Desc:</div>
+      <div class="input-group mb-2">
+        <textarea rows="5" class="form-control" aria-label="With textarea" [(ngModel)]="buildingDesc"> {{buildingDesc}} </textarea>
+      </div>
+
+      <button btn type="button" (click)="saveData()">Save</button>
+      <!-- <textarea rows="4" cols="100" class="m-3" style="width:auto; height:auto"> </textarea> -->
+
+      </div>
+    </div>
+</div>
