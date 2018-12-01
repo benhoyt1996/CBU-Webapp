@@ -41,7 +41,8 @@ export class BuildingDisplayComponent implements OnInit {
         title: this.buildingTitle,
         subTitle: this.buildingSubTitle,
         description: this.buildingDesc
-      })
+      },
+      {merge: true})
       .then(function() {
         console.log("Document successfully written!");
       })
