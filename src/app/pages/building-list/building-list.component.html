@@ -1,9 +1,85 @@
 <div class="container">
   <div class="row">
     <div class="col justify-content-center mt-5 mb-5">
-      <ul class="list-group" *ngFor="let building of buildings">
-        <li class="list-group-item mb-2" routerLink = "building-display" (click)="setBuilding(building)">{{building.title}}</li>
+      <div class="my-2 row">
+        <input
+          class="form-control mr-sm-2 my-search-bar"
+          (input)="updateList()"
+          type="text"
+          [(ngModel)]="filterText"
+          placeholder="Search"
+        />
+        <button
+          type="button"
+          class="btn btn-primary m-3"
+          (click)="open(content)"
+        >
+          Add New Building
+        </button>
+      </div>
+      <ul class="list-group" *ngFor="let building of filteredBuildings">
+        <li
+          class="list-group-item mb-2 list-item"
+          routerLink="building-display"
+          (click)="setBuilding(building)"
+        >
+          <a style="text-align: left">{{ building.title }}</a>
+          <a style="justify-content: right">{{ building.subTitle }}</a>
+        </li>
       </ul>
     </div>
   </div>
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add New Building</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="text-title mb-2">Building Title:</div>
+    <div class="input-group mb-2">
+      <textarea
+        class="form-control"
+        aria-label="With textarea"
+        [(ngModel)]="newBuildingTitle"
+      > {{ newBuildingTitle }} </textarea>
+    </div>
+
+    <div class="text-title mb-2">Building Subtitle:</div>
+    <div class="input-group mb-2">
+      <textarea
+        class="form-control"
+        aria-label="With textarea"
+        [(ngModel)]="newBuildingSubTitle"
+      > {{ newBuildingSubTitle }} </textarea>
+    </div>
+
+    <div class="text-title mb-2">Building Desc:</div>
+    <div class="input-group mb-2">
+      <textarea
+        rows="3"
+        class="form-control"
+        aria-label="With textarea"
+        [(ngModel)]="newBuildingDesc"
+      > {{ newBuildingDesc }} </textarea>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="addBuilding(); modal.dismiss('Cross click')"
+    >
+      Add Building
+    </button>
+    <p>{{ addedText }}</p>
+  </div>
+</ng-template>
