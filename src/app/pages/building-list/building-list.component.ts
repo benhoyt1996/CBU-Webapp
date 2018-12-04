@@ -19,11 +19,18 @@ export class BuildingListComponent implements OnInit {
 
   closeResult: string;
   dataSaved = true;
+  dataFalse = true;
+
+  buildingType = ['Student Resources', 'Housing', 'School', 'Dining'];
 
   newBuildingTitle: any;
   newBuildingSubTitle: any;
   newBuildingDesc: any;
-
+  newBuildingLat: any;
+  newBuildingLong: any;
+  newBuildingCoordinates: any;
+  newBuildingPhoto: any;
+  newBuildingType: any;
   addedText: string;
 
   // tempBuilding: any;
@@ -36,6 +43,15 @@ export class BuildingListComponent implements OnInit {
     this.filteredBuildings = this.buildings.filter(n =>
       n.title.toLowerCase().includes(this.filterText)
     );
+  }
+
+  setType(type) {
+    this.newBuildingType = type;
+  }
+
+  calculateCoordinates() {
+    this.newBuildingCoordinates = '' + this.newBuildingLat + ',' + this.newBuildingLong;
+    console.log(this.newBuildingCoordinates);
   }
 
   addBuilding(): any {
@@ -55,11 +71,33 @@ export class BuildingListComponent implements OnInit {
     this.cbuDataService.buildings.push(testBld);
     this.buildings = this.cbuDataService.buildings;
 
+    const photoArray = [];
+    if(typeof this.newBuildingPhoto == 'undefined'){
+      photoArray.push(' ');
+      console.log('test1');
+    }
+    else{
+      photoArray.push(this.newBuildingPhoto);
+      console.log('test2');
+    }
+
+    if (typeof this.newBuildingLat == 'undefined' || typeof this.newBuildingLong == 'undefined' || 
+       typeof this.newBuildingTitle == 'undefined' || typeof this.newBuildingDesc == 'undefined' || 
+        typeof this.newBuildingSubTitle == 'undefined' )
+    {
+      this.dataFalse = true;
+    }
+    else
+    {
+      this.dataFalse = false;
     db.collection("buildings")
       .add({
         title: this.newBuildingTitle,
         subTitle: this.newBuildingSubTitle,
-        description: this.newBuildingDesc
+        description: this.newBuildingDesc,
+        coordinates: this.newBuildingCoordinates,
+        photos: photoArray,
+        type: this.newBuildingType
       })
       .then(function(docRef) {
         console.log("Document written with ID: ", docRef.id);
@@ -67,6 +105,7 @@ export class BuildingListComponent implements OnInit {
       .catch(function(error) {
         console.error("Error adding document: ", error);
       });
+    }
   }
 
   open(content) {
