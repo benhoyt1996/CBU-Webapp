@@ -1,11 +1,19 @@
 .navbar-wrapper {
-    width: 100%;
+  width: 100%;
 }
 
 .navbar-title {
-    font-size: 30px;
+  font-size: 30px;
 }
 
 .nav-link {
-    font-size: 20px;
+  font-size: 20px;
+}
+
+.vertical-center {
+  min-height: 100%; /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
 }

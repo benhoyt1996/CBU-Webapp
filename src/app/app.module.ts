@@ -10,6 +10,9 @@ import { BuildingListComponent } from './pages/building-list/building-list.compo
 //Theme Component Imports
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { BuildingDisplayComponent } from './pages/building-display/building-display.component';
+import { StartComponent } from './pages/start/start.component';
+import { FacultyDisplayComponent } from './pages/faculty-display/faculty-display.component';
+import { AddFacultyComponent } from './snippets/add-faculty/add-faculty.component';
 
 
 @NgModule({
@@ -17,7 +20,10 @@ import { BuildingDisplayComponent } from './pages/building-display/building-disp
     AppComponent,
     FacultyListComponent,
     BuildingListComponent,
-    BuildingDisplayComponent
+    BuildingDisplayComponent,
+    StartComponent,
+    FacultyDisplayComponent,
+    AddFacultyComponent
   ],
   imports: [
     BrowserModule,

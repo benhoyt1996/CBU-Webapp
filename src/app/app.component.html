@@ -1,8 +1,21 @@
-
-<div class="navbar-wrapper" *ngIf="dataPulled">
+<div class="navbar-wrapper" *ngIf="dataPulled && profDataPulled">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand navbar-title" href="#">CBU Admin</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <a
+      class="navbar-brand navbar-title"
+      href="#"
+      routerLink=""
+      (click)="tabSelected = false"
+      >CBU Admin</a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarColor02"
+      aria-controls="navbarColor02"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -18,6 +31,5 @@
     </div>
   </nav>
 </div>
-
 
 <router-outlet></router-outlet>

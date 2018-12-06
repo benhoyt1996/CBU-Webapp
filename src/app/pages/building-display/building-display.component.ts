@@ -19,10 +19,6 @@ export class BuildingDisplayComponent implements OnInit {
   buildingDesc: any;
   buildingUID: any;
 
-  newBuildingTitle: any;
-  newBuildingSubTitle: any;
-  newBuildingDesc: any;
-
   getData(): void {}
 
   saveData(): void {
@@ -37,12 +33,14 @@ export class BuildingDisplayComponent implements OnInit {
 
     db.collection("buildings")
       .doc(this.buildingUID)
-      .set({
-        title: this.buildingTitle,
-        subTitle: this.buildingSubTitle,
-        description: this.buildingDesc
-      },
-      {merge: true})
+      .set(
+        {
+          title: this.buildingTitle,
+          subTitle: this.buildingSubTitle,
+          description: this.buildingDesc
+        },
+        { merge: true }
+      )
       .then(function() {
         console.log("Document successfully written!");
       })
